@@ -1,24 +1,26 @@
 # CapybaraHaveTableRow
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/capybara_have_table_row`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-## Installation
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+Adds the matcher `have_table_row` to rspec capybara.
 
 ## Usage
 
-TODO: Write usage instructions here
+Expectations are written as `expect(table).to have_table_row({"A" => "A1", "B" => "B1"})`
+
+an array of row values can also be matched `expect(table).to have_table_row(["A1", "B1"])`
+
+Note: because of the way that matchers splat keyword arguments upstream you must pass a hash if you wish to match headers. 
+This: `have_table_row("A" => "A1", "B" => "B1")` will not work.
+
+Provides a nice table print out if the matcher fails.
+```bash
+expected to find table_row {"A"=>"wrong", "B"=>"B1"} within #<Capybara::Node::Simple tag="table" path="/html/body/table[2]"> but there were no matches in: 
+
+      +----+----+----+
+      | D  | E  | F  |
+      +----+----+----+
+      | D1 | E1 | C1 |
+      +----+----+----+
+```
 
 ## Development
 
